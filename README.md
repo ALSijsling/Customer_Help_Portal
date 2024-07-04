@@ -1,4 +1,4 @@
-## Customer Help Portal
+# Customer Help Portal
 
 An application to manage question/problems from customers
 
