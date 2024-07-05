@@ -3,5 +3,10 @@
 </script>
 
 <template>
-    <h1 class="text-3xl font-bold text-red-500">Welcome!</h1>
+    <div>
+        <!-- navigation -->
+    </div>
+    <div>
+        <RouterView />
+    </div>
 </template>
