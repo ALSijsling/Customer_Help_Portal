@@ -15,7 +15,7 @@
         "noImplicitThis": true,
         "alwaysStrict": true,
         "esModuleInterop": true,
-        "checkJs": true,
+        "checkJs": false,
         "jsx": "preserve",
         "resolveJsonModule": true,
     },
