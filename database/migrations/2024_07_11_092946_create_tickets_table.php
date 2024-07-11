@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->foreignId('status_id');
-            $table->foreignId('created_by')->constrained()->cascadeOnDelete();
+            $table->foreignId('created_by');
             $table->foreignId('assigned_to');
             $table->timestamps();
         });
