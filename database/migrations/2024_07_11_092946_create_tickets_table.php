@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('content');
             $table->foreignId('status_id');
             $table->foreignId('created_by');
-            $table->foreignId('assigned_to');
+            $table->foreignId('assigned_to')->nullable();
             $table->timestamps();
         });
     }

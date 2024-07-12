@@ -12,6 +12,6 @@ class Category extends Model
     protected $guarded = [];
 
     public function tickets() {
-        return $this->belongsToMany(Ticket::class, 'tickets_categories');
+        return $this->belongsToMany(Ticket::class);
     }
 }
