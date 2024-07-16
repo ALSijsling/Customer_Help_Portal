@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../../domains/tickets/pages/Overview.vue';
+import Home from '../../domains/tickets/pages/Home.vue';
+import { authRoutes } from '../../domains/auth/routes';
 
 const routes = [{path: '/', name: 'home', component: Home}];
 
@@ -15,6 +16,9 @@ export const goToRoute = (routeName: string) => {
 };
 
 export const addRoute = (routeName: string, component: string, domain: string) => {
-    router.addRoute({path: `/${routeName}`, name: routeName, component: () => import(`../../domains/${domain}/${component}.vue`)})
+    router.addRoute({path: `/${routeName}`, name: routeName, component: () => import(`../../domains/${domain}/pages/${component}.vue`)})
 }
+
+authRoutes();
+
 export default router;
