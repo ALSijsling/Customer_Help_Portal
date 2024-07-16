@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { reactive } from 'vue';
     import { goToRoute } from '../../../services/router';
+    import { getRequest } from '../../../services/http';
 
     const props = defineProps(['user']);
     const emit = defineEmits(['submitUser']);
@@ -8,8 +9,10 @@
     const user = reactive({...props.user});
 
     const onSubmit = () => {
-        emit('submitUser', user.value);
-        goToRoute('Home');
+        getRequest('/sanctum/csrf-cookie').then(response => {
+            emit('submitUser', user.value);
+            goToRoute('Home');
+        });
     }
 </script>
 
