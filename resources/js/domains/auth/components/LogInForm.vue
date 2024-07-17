@@ -1,17 +1,16 @@
 <script setup lang="ts">
-    import { reactive } from 'vue';
+    import { ref } from 'vue';
     import { goToRoute } from '../../../services/router';
     import { getRequest } from '../../../services/http';
 
     const props = defineProps(['user']);
     const emit = defineEmits(['submitUser']);
 
-    const user = reactive({...props.user});
+    const user = ref({...props.user});
 
-    const onSubmit = () => {
-        getRequest('/sanctum/csrf-cookie').then(response => {
-            emit('submitUser', user.value);
-            goToRoute('Home');
+    const onSubmit = async () => {
+        await getRequest('/sanctum/csrf-cookie').then(response => {
+        emit('submitUser', user.value);
         });
     }
 </script>
