@@ -1,8 +1,8 @@
-import { postRequest } from '../../services/http/index';
 import { goToRoute } from '../../services/router';
 import { User } from './types';
+import { postRequest } from '../../services/http';
 
-export const loginUser = async (endpoint: string, item: User) => {
-    const {} = await postRequest(endpoint, item);
+export const loginUser = async (user: User) => {
+    const {} = await postRequest('/login', user);
     goToRoute('Home');
-};
+}

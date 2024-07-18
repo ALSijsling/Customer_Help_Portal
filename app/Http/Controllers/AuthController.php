@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\LogInRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
-class AuthController extends Controller
+class AuthController extends controller
 {
-    public function login(Request $request)
+    public function login(LogInRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required']
-        ]);
+        $credentials = $request->validated();
 
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             return response()->json(Auth::user(), 200);
         }
-
-        throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.']
-        ]);
+       
+        return response()->json(['error' => 'Unauthorized'], 401);       
     }
 }
