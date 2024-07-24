@@ -1,12 +1,12 @@
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
-    import axios from 'axios';
+    import { getRequest } from '../../../services/http';
 
     const user = ref();
 
     onMounted(async () => {
-        axios.get('api/user').then(response => {
-            user.value = response.data;
+        getRequest('me').then(response => {
+            user.value = response.data.user;
         });
     })
 </script>

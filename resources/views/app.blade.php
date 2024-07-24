@@ -13,7 +13,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
         <!-- Styles -->
-        
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" ref="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.mins.js"></script>
     </head>
     
     <body class="font-sans antialiased">

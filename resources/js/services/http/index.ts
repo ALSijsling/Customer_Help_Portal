@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { ResponseMiddleware, ResponseErrorMiddleware } from './types';
+import type { ResponseMiddleware, ResponseErrorMiddleware, RequestMiddleware } from './types';
 
 const baseURL = '/api';
 
@@ -11,8 +11,14 @@ const http = axios.create({
     }
 });
 
+const requestMiddleware: RequestMiddleware[] = [];
 const responseMiddleware: ResponseMiddleware[] = [];
 const responseErrorMiddleware: ResponseErrorMiddleware[] = [];
+
+http.interceptors.request.use(request => {
+    for (const middleware of requestMiddleware) middleware(request);
+    return request;
+});
 
 http.interceptors.response.use(
     response => {
@@ -29,7 +35,7 @@ http.interceptors.response.use(
 export const getRequest = (endpoint: string) => http.get(endpoint);
 export const postRequest = (endpoint: string, data: unknown) => http.post(endpoint, data);
 export const updateRequest = (endpoint: string, data: unknown) => http.patch(endpoint, data);
-export const deleteRequest = (endpoint: string, data: unknown) => http.delete(endpoint);
+export const deleteRequest = (endpoint: string) => http.delete(endpoint);
 
 export const registerResponseMiddleware = (middlewareFunc: ResponseMiddleware) => responseMiddleware.push(middlewareFunc);
 export const registerResponseErrorMiddleware = (middlewareFunc: ResponseErrorMiddleware) => responseErrorMiddleware.push(middlewareFunc);

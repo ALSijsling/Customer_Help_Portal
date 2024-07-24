@@ -1,13 +1,16 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../../domains/tickets/pages/Home.vue';
-import { authRoutes } from '../../domains/auth/routes';
-
-const routes = [{path: '/', name: 'Home', component: Home}];
+import { App } from 'vue';
+import { createRouter, createWebHistory, NavigationGuard, RouteRecordRaw } from 'vue-router';
 
 const router = createRouter({
     history: createWebHistory(),
-    routes
+    routes: [],
 });
+
+export const addRoutes = (routes: RouteRecordRaw[]) => {
+    for (const route of routes) router.addRoute(route);
+}
+
+export const useRouterInApp = (app: App<Element>) => app.use(router);
 
 export const goToRoute = (routeName: string) => {
     router.push({
@@ -15,10 +18,25 @@ export const goToRoute = (routeName: string) => {
     });
 };
 
-export const addRoute = (routeName: string, component: string, domain: string) => {
-    router.addRoute({path: `/${routeName}`, name: routeName, component: () => import(`../../domains/${domain}/pages/${component}.vue`)})
-}
+const beforeRouteMiddleware: NavigationGuard[] = [
+    (to, from) => {
+        const fromQuery = from.query.from;
+        if (fromQuery && typeof fromQuery === 'string') {
+            if (fromQuery === to.fullPath) return false;
+            router.push(fromQuery);
+            return true;
+        }
+        return false;
+    },
+];
 
-authRoutes();
+router.beforeEach(async (to, from, next) => {
+    for (const middlewareFunc of beforeRouteMiddleware) {
+        if (await middlewareFunc(to, from, next)) return next(false);
+    }
+    return next();
+});
+
+export const registerBeforeRouteMiddleware = (middleware: NavigationGuard) => beforeRouteMiddleware.push(middleware);
 
 export default router;

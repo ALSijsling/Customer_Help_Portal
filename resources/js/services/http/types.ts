@@ -1,5 +1,6 @@
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse, AxiosRequestConfig } from "axios";
 
+export type RequestMiddleware = (request: AxiosRequestConfig) => void;
 export type ResponseMiddleware = (response: AxiosResponse) => void;
 export type ResponseErrorMiddleware = (error: AxiosResponseError) => void;
 
