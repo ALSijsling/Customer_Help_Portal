@@ -1,3 +1,3 @@
-import { authRoutes } from "../domains/auth";
+import { authRoutes } from '../services/auth';
 
 export const routes = [...authRoutes];

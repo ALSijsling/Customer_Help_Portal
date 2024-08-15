@@ -1,12 +1,9 @@
 <script setup lang="ts">
-
+    import { isLoggedIn } from './services/auth';
+    import Navigation from './components/NavBar.vue';
 </script>
 
 <template>
-    <div>
-        <!-- navigation -->
-    </div>
-    <div>
-        <RouterView />
-    </div>
+    <Navigation v-if="isLoggedIn"/>
+    <RouterView />
 </template>
