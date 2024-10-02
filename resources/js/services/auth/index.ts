@@ -1,12 +1,12 @@
 import type { LoggedInUser, LoginCredentials, ResponseErrorMiddleware } from './types';
 
 import { computed, ref } from 'vue';
+import { NavigationGuard } from 'vue-router';
+import { goToRoute, registerBeforeRouteMiddleware } from '../router';
 import { getRequest, postRequest, registerResponseErrorMiddleware } from '../http';
 
-import { goToRoute, registerBeforeRouteMiddleware } from '../router';
 import Home from '../../domains/tickets/pages/Home.vue';
 import Login from '../../domains/auth/pages/Login.vue';
-import { NavigationGuard } from 'vue-router';
 
 export const authRoutes = [
     {path: '/', name: 'Home', component: Home, meta: {auth: true, canSeeWhenLoggedIn: true}},
