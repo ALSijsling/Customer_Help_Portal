@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+    import { logout } from '../services/auth';
 </script>
 
 <template>
@@ -8,7 +8,7 @@
             <router-link :to="{name: 'Home'}" class="hover:bg-gray-700 py-1 px-2 rounded-md">Home</router-link>
         </div>
         <div>
-            <button class="hover:bg-gray-700 py-1 px-2 rounded-md">Log Out</button>
+            <button @click="logout" class="hover:bg-gray-700 py-1 px-2 rounded-md">Log Out</button>
         </div>
     </nav>
 </template>

@@ -76,3 +76,11 @@ export const checkIfLoggedIn = async () => {
 
     setLoggedInUser(data.user);
 }
+
+export const logout = async () => {
+    const response = await getRequest('/logout');
+
+    logoutOfApp();
+
+    return response;
+}
