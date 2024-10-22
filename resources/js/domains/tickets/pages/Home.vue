@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
     import { checkIfLoggedIn, getLoggedInUser } from '../../../services/auth';
+    import TicketTable from '../components/TicketTable.vue';
 
     const user = ref();
 
@@ -11,7 +12,5 @@
 </script>
 
 <template>
-    <div>
-        <h1 class="text-3xl font-bold text-red-500">Welcome {{ user?.first_name }}</h1>
-    </div>
+    <TicketTable />
 </template>

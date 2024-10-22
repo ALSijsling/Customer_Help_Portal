@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
 
         Ticket::factory()
                 ->count(75)
-                ->hasAttached($categories)
+                ->hasAttached($categories->random(3))
                 ->state(new Sequence(
                     fn (Sequence $sequence) => ['status_id' => Status::all()->random()]
                 ))
